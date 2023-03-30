@@ -123,4 +123,45 @@ public abstract class NeuralNetworkTools {
 
         System.out.print('}' + "\n");
     }
+
+    /*
+     * Method outputs the sum of a vector(1d array)
+     */
+
+    public static double sumOfArray(double[] array){
+
+        double sum = 0;
+
+        for(double num : array){
+            sum += num;
+        }
+
+        return sum;
+    }
+
+    /*
+     * Method firstly puts inputs in a matrix through an expnonential 
+     * function. It then normalizes the inputs by turning each data point
+     * into a probability by first summing all of the inputs in a given set
+     * and dividing each input by the summation.
+     */
+    public static double[][] normalize(double[][] inputs){
+        
+        double sumOfSet;
+
+        for(int i = 0; i < inputs.length; i++){
+            for(int ii = 0; ii < inputs[i].length; ii++){
+                inputs[i][ii] = Math.exp(inputs[i][ii]);
+            } 
+        }
+
+        for(int i = 0; i < inputs.length; i++){
+            sumOfSet = sumOfArray(inputs[i]);
+            for(int ii = 0; ii < inputs[i].length; ii++){
+                inputs[i][ii] = inputs[i][ii] / sumOfSet;
+            } 
+        }
+
+        return inputs;
+    }
 }
