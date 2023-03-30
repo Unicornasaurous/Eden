@@ -1,4 +1,3 @@
-
 import utils.NeuralNetworkTools;
 import utils.LayerDense;
 import utils.ActivationRectLin;
@@ -24,13 +23,16 @@ public class Eden extends NeuralNetworkTools {
         //double[][] layer1Outputs = addBiases(dotProduct(weights1, inputs), biases1);
         //double[][] layer2Outputs = addBiases(dotProduct(weights2, layer1Outputs), biases2);
         //printMatrix(layer2Outputs);
-        LayerDense layer1 = new LayerDense(4, 5);
+        LayerDense layer1 = new LayerDense(4, 6);
 
         ActivationRectLin activation1 = new ActivationRectLin();
 
-        LayerDense layer2 = new LayerDense(5, 6);
+        LayerDense layer2 = new LayerDense(6, 6);
 
         ActivationRectLin activation2 = new ActivationRectLin();
+
+        LayerDense finalOutputLayer = new LayerDense(6, 2);
+
 
         layer1.forward(inputs);
 
@@ -44,11 +46,20 @@ public class Eden extends NeuralNetworkTools {
 
         activation2.forward(layer2Ouputs);
 
+        finalOutputLayer.forward(layer2Ouputs);
+
+        double[][] finalOutput = normalize(finalOutputLayer.outputs);
+
         System.out.println("Layer 1 Output");
         printMatrix(activation1.outputs);
 
-        System.out.println("Final Output:");
+        System.out.println("Layer 2 Output:");
         printMatrix(activation2.outputs);
+
+        System.out.println("Final Output:");
+        printMatrix(finalOutput);
+
+
 
     }
 
